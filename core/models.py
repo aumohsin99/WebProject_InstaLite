@@ -16,3 +16,5 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    # finally I have recovered everything. It's functioning now. Breath, breath
