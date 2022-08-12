@@ -12,6 +12,10 @@ def index(request):
     return render(request, 'index.html')
    # return HttpResponse('<h1>Welcome to Social Book</h1>')
 
+@login_required(login_url='signin')
+def settings(request):
+    return render(request, 'setting.html')
+
 def signup(request):
     if request.method == 'POST':
         username = request.POST['username']
