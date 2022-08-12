@@ -41,3 +41,7 @@ def signup(request):
        # print(username)
     else:
         return render(request, 'signup.html')
+
+
+def signin(request):
+    return render(request, 'signin.html')
