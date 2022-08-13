@@ -4,13 +4,13 @@ from django.contrib import  messages
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+
 # Create your views here.
 
 # decorator is used in the line below
 @login_required(login_url='signin')
 def index(request):
     return render(request, 'index.html')
-   # return HttpResponse('<h1>Welcome to Social Book</h1>')
 
 @login_required(login_url='signin')
 def settings(request):
@@ -47,7 +47,6 @@ def signup(request):
             messages.info(request, 'Password not matching')
             return redirect('signup')
 
-       # print(username)
     else:
         return render(request, 'signup.html')
 
