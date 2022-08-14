@@ -168,7 +168,6 @@ def profile(request, pk):
         'user_followers': user_followers,
         'user_following': user_following,
 
-
     }
     return render(request, 'profile.html', context)
 
