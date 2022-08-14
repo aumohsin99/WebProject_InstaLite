@@ -27,9 +27,11 @@
 	<section>
 			<div class="feature-photo">
 				<figure><img src="{% static 'images/resources/timeline-1.jpg' %}" alt=""></figure>
-				<form>
+{#				<span style="color: red; font-size: 27px; margin-right: 520px;"><b><u><a href="/">Home</a></u></b></span>#}
+                <form>
 					<div class="add-btn">
-                <span style="color: white; font-size: 27px; margin-right: 520px;"><b><u><a href="/">Home</a></u></b></span>
+					<span style="color: white; font-size: 27px; margin-right: 380px;"><b><u><a href="/">Home</a></u></b></span>
+
                     {% if user_post_length == 0 %}
                     <span style="color: white; font-size: 27px;"><b>No Posts</b></span>
                     {% elif user_post_length == 1 %}
@@ -157,7 +159,7 @@
 
 	
 	
-	<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="js/main.min.js"></script>
+	<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'js/main.min.js' %}"></script>
 	<script src="{% static 'js/script.js' %}"></script>
 
 </body>	
