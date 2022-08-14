@@ -14,7 +14,11 @@ def index(request):
     user_profile = Profile.objects.get(user=user_object)
     # first get object of user profile and then get image from that object
 
-    return render(request, 'index.html', {'user_profile': user_profile})
+
+    # followed person posts only
+
+    posts = Post.objects.all()
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts': posts})
 
 @login_required(login_url='signin')
 def upload(request):
