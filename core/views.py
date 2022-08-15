@@ -18,7 +18,6 @@ def index(request):
     # elif request.method == "POST":
 
     # if request.method == 'POST':
-    #global user ={}
 
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
