@@ -12,13 +12,6 @@ import random
 # decorator is used in the line below
 @login_required(login_url='signin')
 def index(request):
-    #global user
-
-    #     return redirect('/')
-    # elif request.method == "POST":
-
-    # if request.method == 'POST':
-
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
     # first get object of user profile and then get image from that object
@@ -56,7 +49,7 @@ def index(request):
     username_profile_list = []
 
     for users in final_suggestions_list:
-        username_profile.append(user.id)
+        username_profile.append(users.id)
 
     for ids in username_profile:
         profile_lists = Profile.objects.filter(id_user=ids)
@@ -67,8 +60,6 @@ def index(request):
 
     return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list,'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
 
-        # else:
-        # return render(request, 'index.html')
 
 @login_required(login_url='signin')
 def upload(request):
