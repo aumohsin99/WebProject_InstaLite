@@ -5,12 +5,18 @@ from .models import Profile, Post, LikePost, FollowersCount
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from itertools import chain
+import random
 
 # Create your views here.
 
 # decorator is used in the line below
 @login_required(login_url='signin')
 def index(request):
+    # # global user
+    # if request.method == 'GET':
+    #     return redirect('/')
+    # elif request.method == "POST":
+
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
     # first get object of user profile and then get image from that object
@@ -27,12 +33,38 @@ def index(request):
 
     feed_list = list(chain(*feed))
 
-
     # followed person posts only
 
-    posts = Post.objects.all()
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list})
+    # posts = Post.objects.all()
+    # user suggestions function here
+    all_users = User.objects.all()
+    user_following_all = []
 
+    for user in user_following:
+        user_list = User.objects.get(username=user.user)
+        user_following_all.append(user_list)
+
+    new_suggestions_list = [x for x in list(all_users) if (x not in list(user_following_all))]
+    current_user = User.objects.filter(username=request.user.username)
+    final_suggestions_list = [x for x in list(new_suggestions_list) if (x not in list(current_user))]
+
+    random.shuffle(final_suggestions_list)
+    # now pass this list to template for display
+
+    username_profile = []
+    username_profile_list = []
+
+    for users in final_suggestions_list:
+        username_profile.append(user.id)
+
+    for ids in username_profile:
+        profile_lists = Profile.objects.filter(id_user=ids)
+        username_profile_list.append(profile_lists)
+
+    # below is the final list
+    suggestions_username_profile_list = list(chain(*username_profile_list))
+
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list, 'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
 
 @login_required(login_url='signin')
 def upload(request):
@@ -209,6 +241,7 @@ def follow(request):
 
 @login_required(login_url='signin')
 def search(request):
+    # global username_profile_list
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
 
@@ -228,5 +261,6 @@ def search(request):
 
         username_profile_list = list(chain(*username_profile_list))
     return render(request, 'search.html', {'user_profile': user_profile, 'username_profile_list': username_profile_list})
+
 
 
