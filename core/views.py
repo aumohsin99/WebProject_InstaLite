@@ -17,6 +17,8 @@ def index(request):
     #     return redirect('/')
     # elif request.method == "POST":
 
+    # if request.method == 'POST':
+
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
     # first get object of user profile and then get image from that object
@@ -35,7 +37,6 @@ def index(request):
 
     # followed person posts only
 
-    # posts = Post.objects.all()
     # user suggestions function here
     all_users = User.objects.all()
     user_following_all = []
@@ -64,7 +65,10 @@ def index(request):
     # below is the final list
     suggestions_username_profile_list = list(chain(*username_profile_list))
 
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list, 'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list,'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
+
+    # else:
+    # return render(request, 'index.html')
 
 @login_required(login_url='signin')
 def upload(request):
