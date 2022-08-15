@@ -12,12 +12,13 @@ import random
 # decorator is used in the line below
 @login_required(login_url='signin')
 def index(request):
-    # # global user
-    # if request.method == 'GET':
+    #global user
+
     #     return redirect('/')
     # elif request.method == "POST":
 
     # if request.method == 'POST':
+    #global user ={}
 
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
@@ -67,8 +68,8 @@ def index(request):
 
     return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list,'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
 
-    # else:
-    # return render(request, 'index.html')
+        # else:
+        # return render(request, 'index.html')
 
 @login_required(login_url='signin')
 def upload(request):
@@ -246,6 +247,7 @@ def follow(request):
 @login_required(login_url='signin')
 def search(request):
     # global username_profile_list
+    global username_profile_list
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
 
