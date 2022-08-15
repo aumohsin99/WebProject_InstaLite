@@ -31,7 +31,7 @@ def index(request):
     # followed person posts only
 
     posts = Post.objects.all()
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts': posts})
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts': feed_list})
 
 
 @login_required(login_url='signin')
