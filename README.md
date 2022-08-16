@@ -14,3 +14,4 @@ Features to be added:
 1. Comments option on post
 2. Explore page
 3. Maybe better privacy
+4. Video Upload
